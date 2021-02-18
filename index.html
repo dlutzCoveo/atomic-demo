@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Atomic Demo</title>
+
+    <script type="module" src="/build/atomic.esm.js"></script>
+    <script nomodule src="/build/atomic.js"></script>
+    <link rel="stylesheet" href="/build/atomic.css" />
+    <script>
+      (async () => {
+        await customElements.whenDefined('atomic-search-interface');
+        const searchInterface = document.querySelector('#search');
+
+        // Initialization
+        await searchInterface.initialize({
+          // accessToken:"xx402dc996-ce70-4eda-a079-7f06f1840fab",
+          // organizationId:"dlutztempsxn5ypuw"
+          accessToken: 'xx564559b1-0045-48e1-953c-3addd1ee4457',
+          organizationId: 'searchuisamples',
+        });
+
+        // Trigger a first search
+        searchInterface.executeFirstSearch();
+
+        // Add/modify a translation
+        // searchInterface.i18n.addResource('en', 'translation', 'search', 'Make me feel lucky!');
+        // Change the language of the interface dynamically
+        // searchInterface.language = 'fr';
+        // Interact with the engine
+        // searchInterface.engine.dispatch(...);
+        // Get all strings for a language/namespace
+        // const allStrings = searchInterface.i18n.getResourceBundle('en', 'translation');
+      })();
+    </script>
+    <style>
+      /* Example on how to customize CSS variables */
+      /* :root {
+        --atomic-primary: red;
+        --atomic-font-family: "Comic Sans MS", "Comic Sans", cursive;
+        --atomic-secondary: green;
+      } */
+
+      /* Example on how to customize custom templates CSS parts */
+
+      atomic-tab::part(tab-button) {
+        border-radius: 6px;
+        color: rgb(25, 0, 255);
+        background-color: seashell;
+      }
+      atomic-tab:hover::part(tab-button) {
+        background-color: orangered;
+        color: seashell;
+      }
+
+      atomic-search-box::part(submit-button) {
+        background-color: orangered;
+      }
+
+      #tabs {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    <atomic-search-interface id="search">
+      <div id="tabs" class="space-x-4">
+        <atomic-tab expression="" class="">All Files</atomic-tab>
+        <atomic-tab expression='@author *= "BBC News"'>BBC News</atomic-tab>
+      </div>
+      <div class="m-auto my-4 max-w-3xl">
+        <atomic-search-box leading-submit-button="true"> </atomic-search-box>
+      </div>
+      <div class="flex flex-col lg:flex-row p-3">
+        <atomic-facet-manager class="flex flex-row mx-2 mb-2 lg:flex-col lg:w-50">
+          <atomic-facet class="mr-2" field="author" label="Authors"></atomic-facet>
+          <atomic-numeric-facet class="mr-2" field="size" label="File sizes in"></atomic-numeric-facet>
+          <atomic-date-facet class="mr-2" field="created" label="Created"></atomic-date-facet>
+          <atomic-category-facet class="mr-2" field="geographicalhierarchy" label="World Atlas"></atomic-category-facet>
+        </atomic-facet-manager>
+        <div class="flex-grow pl-2">
+          <atomic-breadcrumb-manager category-divider="|" collapse-threshold="3"></atomic-breadcrumb-manager>
+          <atomic-did-you-mean></atomic-did-you-mean>
+          <atomic-query-error></atomic-query-error>
+          <div class="flex justify-between items-end my-2">
+            <atomic-query-summary class="p-2"></atomic-query-summary>
+            <atomic-sort-dropdown>
+              <atomic-sort-criteria caption="relevance" criteria="relevancy"></atomic-sort-criteria>
+              <atomic-sort-criteria caption="mostRecent" criteria="date descending"></atomic-sort-criteria>
+            </atomic-sort-dropdown>
+          </div>
+
+          <atomic-no-results></atomic-no-results>
+
+          <atomic-result-list class="grid max-w-full" fields-to-include="filetype">
+            <atomic-result-template id="demoTemplate">
+              <hr />
+              <div id="title" class="py-4" style="color: slategrey">
+                <a href="{{clickUri}}"><h3 class="text-xl">{{title}}</h3></a>
+              </div>
+              <p class="pb-4">
+                <atomic-result-value value="excerpt"></atomic-result-value>
+              </p>
+              <div id="type">
+                <atomic-result-value value="filetype"></atomic-result-value>
+              </div>
+            </atomic-result-template>
+          </atomic-result-list>
+
+          <div class="flex flex-col lg:flex-row justify-between my-2">
+            <atomic-pager></atomic-pager>
+            <atomic-results-per-page></atomic-results-per-page>
+          </div>
+        </div>
+      </div>
+      <atomic-history></atomic-history>
+    </atomic-search-interface>
+    <!-- <atomic-recommendation></atomic-recommendation> -->
+    <!-- <atomic-frequently-bought-together></atomic-frequently-bought-together> -->
+  </body>
+</html>
