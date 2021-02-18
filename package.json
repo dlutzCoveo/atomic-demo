@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@coveo/atomic": "^0.2.0-alpha.0",
+    "es-dev-server": "^2.1.0",
     "marked": "^2.0.0"
   },
   "devDependencies": {
