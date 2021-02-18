@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "es-dev-server --app-index index.html --node-resolve --watch --open"
-    
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@coveo/atomic": "^0.2.0-alpha.0",
-    "es-dev-server": "^2.1.0"
+    "marked": "^1.2.9"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.8"
   }
 }
