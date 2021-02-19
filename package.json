@@ -11,8 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "@coveo/atomic": "^0.2.0-alpha.0",
+    "@coveo/bueno": "^0.6.0-alpha.8",
+    "@coveo/headless": "^0.6.0-alpha.8",
+    "@stencil/core": "^2.4.0",
+    "@types/node": "14.14.30",
+    "coveo-styleguide": "^9.26.0",
     "es-dev-server": "^2.1.0",
-    "marked": "^2.0.0"
+    "i18next": "^19.8.4",
+    "i18next-http-backend": "^1.0.21",
+    "marked": "^2.0.0",
+    "mustache": "^4.0.1",
+    "stencil-inline-svg": "^1.0.1",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@web/dev-server": "^0.1.8"
